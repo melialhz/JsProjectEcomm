@@ -8,6 +8,22 @@ const LoginSignup = () => {
     email: "",
   });
 
+  const changeHandler = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleResponse = (responseData) => {
+    if (responseData && responseData.success) {
+      localStorage.setItem("auth-token", responseData.token);
+      window.location.replace("/");
+    } else {
+      alert(responseData.errors || "An error occurred during authentication.");
+    }
+  };
+
   const login = async () => {
     const response = await fetch("http://localhost:5080/login", {
       method: "POST",
