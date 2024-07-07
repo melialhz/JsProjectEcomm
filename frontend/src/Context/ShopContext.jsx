@@ -16,7 +16,7 @@ const ShopContextProvider = (props) => {
     const [cartItem, setCartItem] = useState(getDefaultCart());
 
     useEffect(() => {
-        fetch('http://localhost:5080/allproducts')
+        fetch('http://localhost:5080/api/products/allproducts')
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -27,7 +27,7 @@ const ShopContextProvider = (props) => {
         .catch((error) => console.error('Error fetching data:', error));
 
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:5080/getcart',{
+            fetch('http://localhost:5080/api/users/getcart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -44,7 +44,7 @@ const ShopContextProvider = (props) => {
         setCartItem((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
         const authToken = localStorage.getItem('auth-token');
         if (authToken) {
-            fetch('http://localhost:5080/addtocart', {
+            fetch('http://localhost:5080/api/users/addtocart', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -68,7 +68,7 @@ const removeFromcart = (itemId) => {
     const authToken = localStorage.getItem('auth-token');
     
     if (authToken) {
-        fetch('http://localhost:5080/removefromcart', {
+        fetch('http://localhost:5080/api/users/removefromcart', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
