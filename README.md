@@ -91,3 +91,7 @@ SECRET_KEY=anythinghere
 - Add products to the cart.
 - Remove products from cart.
 - Browse different categories(Men, Women, Kids).
+
+![page-acceuil](./page-acceuil.png)
+
+Made with ❤️ by [Milia]
